@@ -1,56 +1,69 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <title>{{ __('DnvMaster - вход') }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="{{ asset('master/auth/images/favicon.png') }}" rel="shortcut icon" >
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('master/auth/css/style.css') }}">
+</head>
+    <body class="img js-fullheight" style="background-image: url({{ asset('master/auth/images/bg.jpg') }});">
+        <section class="ftco-section">
+            <div class="container">
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+                <div class="row justify-content-center">
+                    <div class="col-md-6 text-center mb-5">
+                        <h2 class="heading-section">{{ __('DnvMaster') }}</h2>
+                    </div>
+                </div>
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="login-wrap p-0">
+                            @if(session('status'))
+                                <div class="mb-4 font-medium text-sm text-green-600">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+                            <form class="signin-form" action="{{ route('login') }}" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="email" name="email" class="form-control" placeholder="{{ __('Е-мэйл') }}" required autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input id="password" type="password" name="password" class="form-control" placeholder="{{ __('Пароль') }}" required autocomplete="current-password">
+                                    <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                </div>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn btn-primary submit px-3">{{ __('Войти') }}</button>
+                                </div>
 
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                                <div class="form-group d-md-flex">
+                                    <div class="w-50">
+                                        <label class="checkbox-wrap checkbox-primary">{{ __('Запомнить') }}
+                                            <input type="checkbox" name="remember" checked>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="w-50 text-md-right">
+                                        @if (Route::has('password.request'))
+                                            <a href="{{ route('password.request') }}" style="color: #fff"> {{ __('Забыли пароль ?') }}</a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
-
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+        </section>
+        <!-- Inclue Js files -->
+        <script src="{{ asset('master/auth/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('master/auth/js/popper.js') }}"></script>
+        <script src="{{ asset('master/auth/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('master/auth/js/main.js') }}"></script>
+    </body>
+</html>
