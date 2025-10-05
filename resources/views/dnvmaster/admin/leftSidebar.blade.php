@@ -23,7 +23,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="auth-login.html">{{ __('Логин') }}</a></li>
                         <li><a href="auth-register.html">{{ __('Регистрация') }}</a></li>
-                        <li><a href="auth-recoverpw.html">{{ __('Восстановbnm пароль') }}</a></li>
+                        <li><a href="auth-recoverpw.html">{{ __('Восстановить пароль') }}</a></li>
                         <li><a href="auth-lock-screen.html">{{ __('Блокировка') }}</a></li>
                     </ul>
                 </li>
@@ -31,10 +31,10 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-profile-line"></i>
-                        <span>{{ __('Утилиты') }}</span>
+                        <span>{{ __('Настройки сайта') }}</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="pages-starter.html">Starter Page</a></li>
+                        <li><a href="{{ route('home.section') }}">{{ __('Секция на главную стр') }}</a></li>
                         <li><a href="pages-404.html">Error 404</a></li>
                         <li><a href="pages-500.html">Error 500</a></li>
                     </ul>
